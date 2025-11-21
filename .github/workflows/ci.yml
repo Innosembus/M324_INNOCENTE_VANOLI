@@ -1,1 +1,24 @@
+name: Node.js Code-Qualitätsprüfung
 
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  code-quality-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Node.js 20 konfigurieren
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Abhängigkeiten installieren
+        run: npm install
+
+      - name: Linter ausführen
+        run: npm run lint
